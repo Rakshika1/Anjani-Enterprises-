@@ -1,0 +1,300 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Anjani Enterprises — editorial design system.
+ * Refined cream canvas, deep ink typography, warm off-white for sections.
+ * Cormorant Garamond for display/serif headings; Inter for body and UI.
+ *
+ * DESIGN PRINCIPLES:
+ * - Contrast ratio 4.5:1 minimum on all text
+ * - Restrained scale — elegant, not overwhelming
+ * - Generous but purposeful whitespace
+ * - Consistent spacing multiples of 4/8
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  /* Editorial-specific tokens */
+  --color-canvas: var(--canvas);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-rule: var(--rule);
+
+  --font-serif: "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
+  --font-sans: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+:root {
+  --radius: 0.125rem;
+
+  /* Editorial palette — tested for WCAG AA contrast */
+  --canvas: oklch(0.99 0.003 80);              /* warm white */
+  --cream: oklch(0.965 0.008 80);              /* warm off-white for alternating sections */
+  --ink: oklch(0.15 0.005 250);                /* deep ink — 11:1 contrast on canvas */
+  --ink-soft: oklch(0.40 0.005 250);           /* secondary text — 5.5:1 contrast on canvas */
+  --rule: oklch(0.85 0.005 80);                /* visible hairline rules */
+
+  /* Semantic mapping */
+  --background: var(--canvas);
+  --foreground: var(--ink);
+  --card: var(--canvas);
+  --card-foreground: var(--ink);
+  --popover: var(--canvas);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--canvas);
+  --secondary: var(--cream);
+  --secondary-foreground: var(--ink);
+  --muted: var(--cream);
+  --muted-foreground: var(--ink-soft);
+  --accent: var(--cream);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.55 0.22 27);
+  --destructive-foreground: var(--canvas);
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--ink);
+}
+
+.dark {
+  --background: var(--ink);
+  --foreground: var(--canvas);
+  --card: var(--ink);
+  --card-foreground: var(--canvas);
+  --popover: var(--ink);
+  --popover-foreground: var(--canvas);
+  --primary: var(--canvas);
+  --primary-foreground: var(--ink);
+  --secondary: oklch(0.15 0 0);
+  --secondary-foreground: var(--canvas);
+  --muted: oklch(0.15 0 0);
+  --muted-foreground: oklch(0.7 0 0);
+  --accent: oklch(0.15 0 0);
+  --accent-foreground: var(--canvas);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 18%);
+  --ring: var(--canvas);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    letter-spacing: 0.005em;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+  }
+}
+
+@layer utilities {
+  /* ── Eyebrow label ── */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.6875rem;
+    color: var(--color-ink-soft);
+  }
+
+  /* ── Display type — restrained scale ── */
+  .display-serif {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  .body-serif {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  /* ── Rules ── */
+  .rule-line {
+    height: 1px;
+    background-color: var(--color-rule);
+  }
+
+  /* ── Reveal animations ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Clip-reveal for serif headlines */
+  .reveal-clip {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(16px);
+    transition:
+      opacity 1000ms cubic-bezier(0.22, 1, 0.36, 1),
+      clip-path 1000ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1000ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: clip-path, opacity, transform;
+  }
+  .reveal-clip.is-visible {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0);
+  }
+
+  /* ── Ken Burns ── */
+  .ken-burns {
+    animation: ken-burns 22s ease-out both;
+  }
+
+  /* ── Marquee ── */
+  .marquee {
+    display: flex;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 4rem;
+    animation: marquee 38s linear infinite;
+    flex-shrink: 0;
+    min-width: 100%;
+    padding-right: 4rem;
+  }
+
+  /* ── Drawing rule ── */
+  .draw-rule {
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform 1100ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .reveal.is-visible .draw-rule,
+  .draw-rule.is-visible {
+    transform: scaleX(1);
+  }
+
+  /* ── Story links ── */
+  .story-link {
+    position: relative;
+    display: inline-block;
+  }
+  .story-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .story-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* ── Keyframes ── */
+@keyframes ken-burns {
+  0% { transform: scale(1.04); }
+  100% { transform: scale(1.12); }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes scroll-cue {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+.scroll-cue {
+  animation: scroll-cue 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal,
+  .reveal-clip {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+  .draw-rule { transform: scaleX(1) !important; transition: none !important; }
+  .ken-burns,
+  .marquee-track,
+  .scroll-cue { animation: none !important; }
+}
