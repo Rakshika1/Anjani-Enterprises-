@@ -92,6 +92,13 @@ export function EditorialImage({
     };
   }, [parallax, kenBurns]);
 
+  useEffect(() => {
+    if (imgRef.current?.complete) {
+      setLoaded(true);
+    }
+  }, []);
+
+
   return (
     <figure className={cn("flex flex-col gap-3", className)}>
       <div
